@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+
+{% block body %}
+	{% if shorteneds %}
+<ul>
+{% for shortened in  shorteneds%}
+<li>
+{{ shortened.url_shortened }}
+<ul>
+	<li>{{shortened.url}}</li>
+	<li>{{shortened.created_at}}</li>
+</ul>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

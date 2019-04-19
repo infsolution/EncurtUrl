@@ -1,0 +1,9 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% block body %}
+<h1>{% trans "Url Não encontrada" %}</h1>
+The url {{value}} not found
+<h3>Error</h3>
+<p>{{error}}</p>
+
+{% endblock %}

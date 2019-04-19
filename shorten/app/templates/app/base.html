@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+{% load i18n %}
+{% load static %}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>{% trans title_page %}</title>
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script defer src="{% static 'fontawesome/js/fontawesome-all.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome-all.min.css' %}">
+    <style type="text/css">
+		.row{height: 75vh}
+	</style>
+</head>
+<body style="margin-top: 5em;">
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+			<div class="container">
+			<a class="navbar-brand" href="#">Navbar</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+		    
+		    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="#">Link</a>
+		      </li>
+		    </ul>
+
+		    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="#">Login</a>
+		      </li>
+		    </ul>
+
+		  </div>
+		  </div>
+		</nav>
+	</header>
+	<section class="row">
+		<nav class="col-md-4">
+			<div class="container-fluid">
+				Publicidade
+			</div>
+			
+		</nav>
+		<content class="col-md-8">
+			<h1>{% trans "O melhor encurtador" %}</h1>
+			<div class="container-fluid">
+				<div class="row align-items-center">
+		 	{% block body %}
+			{% endblock %}
+				</div>
+			</div>
+		</content>
+	</section>
+	<footer>
+		<div class="container"><h5>{% trans "Por que OEncurtador é o melhor?" %}</h5>	
+		<div class="col-xs-12 text-center">
+
+		      <p>&copy; {% trans "Todos os direitos resevados a Infsolution." %}</p>
+		 </div>
+		</div>
+		 
+	</footer>
+	<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
+
+
+
+	<!--form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Go" />
+</form-->

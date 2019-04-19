@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.db import models
 from random import randint
-
+import datetime
 class Shortened(models.Model):
 	user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE, null=True)
 	url = models.CharField(max_length=1024)
@@ -12,6 +13,13 @@ class Shortened(models.Model):
 
 	def shorten(self):
 		self.url_shortened = self.get_code()
+		self.set_expiring_date()
+
+	def set_expiring_date(self):
+		if self.user == None:
+			self.expiring_date = timezone.now() + datetime.timedelta(days=30)
+	
+
 
 
 	def get_code(self):
