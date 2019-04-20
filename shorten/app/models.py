@@ -3,20 +3,31 @@ from django.utils import timezone
 from django.db import models
 from random import randint
 import datetime
+
+class Perfil(models.Model):
+	user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE)
+	email_validated = models.BooleanField(default=False)
+	created_at = models.DateField(auto_now_add=True)
+	contatos = models.ManyToManyField('Perfil')
+	def __str__(self):
+		return self.user.username
+
+
 class Shortened(models.Model):
-	user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE, null=True)
+	perfil = models.OneToOneField(Perfil, related_name='shorteneds', on_delete=models.CASCADE, null=True)
 	url = models.CharField(max_length=1024)
 	url_shortened = models.CharField(max_length=256, null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	expiring_date = models.DateTimeField(auto_now_add=False, null=True)
 	code = models.CharField(max_length=12, null=True)
+	private_code = models.CharField(max_length=12, null=True);
 
 	def shorten(self):
 		self.url_shortened = self.get_code()
 		self.set_expiring_date()
 
 	def set_expiring_date(self):
-		if self.user == None:
+		if self.perfil == None:
 			self.expiring_date = timezone.now() + datetime.timedelta(days=30)
 	
 

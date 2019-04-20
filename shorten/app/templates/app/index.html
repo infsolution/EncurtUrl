@@ -1,9 +1,15 @@
 {% extends 'app/base.html' %}
 {% load i18n %}
+{% block head %}
+    <style type="text/css">
+		.row{height: 75vh}
+	</style>
+{%endblock%}
 {% block body %}
+<div class="row">
 			<form class="form-inline" method="GET" action="{% url 'shorten' %}">
-				<div class="input-group mb-3">
-					<input class="form-control-lg" type="search" placeholder="URL" name="url" required>
+				<div class="input-group">
+					<input class="form-control-lg" type="search" placeholder="{% trans 'URL a encurtar' %}" name="url" required>
 				<div class="input-group-append">
 			    <button class="btn btn-primary" type="submit">{% trans "Encurtar" %}</button>
 				</div>
@@ -12,10 +18,8 @@
 		
 		{% if url_short %}
 		<h3>Sua url: localhost:8000/{{ url_short }}</h3>
-		{% endif %}
-			
-		
+		{% endif %}			
 	</div>
-
+</div>
 {% endblock %}
 
