@@ -5,22 +5,22 @@ from random import randint
 import datetime
 
 class Perfil(models.Model):
+	name = models.CharField(max_length=255, default='')
 	user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE)
 	email_validated = models.BooleanField(default=False)
 	created_at = models.DateField(auto_now_add=True)
 	contatos = models.ManyToManyField('Perfil')
-	def __str__(self):
-		return self.user.username
+
 
 
 class Shortened(models.Model):
-	perfil = models.OneToOneField(Perfil, related_name='shorteneds', on_delete=models.CASCADE, null=True)
+	perfil = models.ForeignKey(Perfil, related_name='shorteneds', on_delete=models.CASCADE, null=True)
 	url = models.CharField(max_length=1024)
-	url_shortened = models.CharField(max_length=256, null=True)
+	url_shortened = models.CharField(max_length=256, null=True, unique=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	expiring_date = models.DateTimeField(auto_now_add=False, null=True)
-	code = models.CharField(max_length=12, null=True)
-	private_code = models.CharField(max_length=12, null=True);
+	code = models.CharField(max_length=12, null=True, unique=True)
+	private_code = models.CharField(max_length=12, null=True)
 
 	def shorten(self):
 		self.url_shortened = self.get_code()

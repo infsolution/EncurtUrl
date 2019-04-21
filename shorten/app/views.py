@@ -4,22 +4,29 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 def index(request):
-    return render(request,'app/index.html',{"title_page":"O melhor encurtador"})
+	perfil_logado = get_perfil_logado(request)
+	return render(request,'app/index.html',{"title_page":"O melhor encurtador","perfil_logado":perfil_logado})
 
 def get_perfil_logado(request):
-	return request.user.perfil
+	try:
+		perfil = Perfil.objects.get(user=request.user)
+	except Exception as e:
+		return None
+	return perfil
 
 def shorten(request):
 	if request.GET.get('url'):
-		short = Shortened(url=request.GET.get('url'))
+		short = Shortened(perfil=get_perfil_logado(request), url=request.GET.get('url'))
 		short.shorten()
 		short.save()
-		return render(request, 'app/index.html',{"url_short":short.url_shortened})
-	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", "title_page":"Url Não encontrada"})
-
+		return render(request, 'app/index.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request)})
+	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", 
+	"title_page":"Url Não encontrada","perfil_logado":get_perfil_logado(request)})
+@login_required
 def shotened_report(request):
-	shorteneds = Shortened.objects.all()
-	return render(request, 'app/report.html',{"shorteneds":shorteneds})
+	perfil_logado = get_perfil_logado(request)
+	shorteneds = Shortened.objects.filter(perfil=perfil_logado)
+	return render(request, 'app/report.html',{"shorteneds":shorteneds,"perfil_logado":perfil_logado})
 
 def go_to_url(request, shortened):
 	if request.method == 'GET':
@@ -34,9 +41,9 @@ def create_user(request):
 		form = UserModelForm(request.POST)
 		if form.is_valid():
 			user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
-			perfil = Perfil(user=user)
+			perfil = Perfil(name=user.username, user=user)
 			perfil.save()
-			return render(request, 'app/add.html', {'form':UserModelForm(), 'msg_confirm':'Parabéns você seu cadastro foi realizado.'})
+			return render(request, 'app/add.html', {'form':UserModelForm(), 'msg_confirm':'Parabéns seu cadastro foi realizado.'})
 		return render(request, 'app/add.html',{'form':UserModelForm(request.POST), 'msg_confirm':'Ocorreu um erro ao realizar o cadastro.'})
 	form = UserModelForm()
 	return render(request, 'app/add.html', {"form":form})

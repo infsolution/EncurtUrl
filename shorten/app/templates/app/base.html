@@ -34,12 +34,12 @@
 					</ul>
 
 					<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-						{%if user.username%}
+						{% if perfil_logado.name %}
 
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ perfil_logado.name }}</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="{% url 'report'%}">{% trans "Relatório" %}</a>
 								<a class="dropdown-item" href="#">Another action</a>
 								<a class="dropdown-item" href="#">Something else here</a>
 								<div class="dropdown-divider"></div>

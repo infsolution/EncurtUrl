@@ -14,12 +14,13 @@
 			    <button class="btn btn-primary" type="submit">{% trans "Encurtar" %}</button>
 				</div>
 			</div>
+			
 			</form>
 		
-		{% if url_short %}
-		<h3>Sua url: localhost:8000/{{ url_short }}</h3>
-		{% endif %}			
-	</div>
+				
 </div>
+{% if url_short %}
+			<h3>Sua url: localhost:8000/{{ url_short }}</h3>
+			{% endif %}	
 {% endblock %}
 
