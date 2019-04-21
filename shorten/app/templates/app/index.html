@@ -2,25 +2,29 @@
 {% load i18n %}
 {% block head %}
     <style type="text/css">
-		.row{height: 75vh}
+		#form-id{height: 50vh}
 	</style>
 {%endblock%}
 {% block body %}
 <div class="row">
-			<form class="form-inline" method="GET" action="{% url 'shorten' %}">
-				<div class="input-group">
+			<form class="col-md-10" method="GET" action="{% url 'shorten' %}">
+				<div class="input-group form-inline">
 					<input class="form-control-lg" type="search" placeholder="{% trans 'URL a encurtar' %}" name="url" required>
 				<div class="input-group-append">
-			    <button class="btn btn-primary" type="submit">{% trans "Encurtar" %}</button>
+				<button class="btn btn-primary" type="submit">{% trans "Encurtar" %}</button>
 				</div>
+				</div>
+			<div class="form-group">
+			  {%  if perfil_logado %}
+			    <input type="checkbox" name="private" value="1"> Private<br>
+				{% endif %}
 			</div>
-			
 			</form>
-		
-				
-</div>
-{% if url_short %}
-			<h3>Sua url: localhost:8000/{{ url_short }}</h3>
+			{% if url_short %}
+				<h3>Sua url: localhost:8000/{{ url_short }}</h3>
 			{% endif %}	
+</div>
+		
+
 {% endblock %}
 

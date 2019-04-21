@@ -10,22 +10,22 @@
 	{% csrf_token %}
 	
     <div class="form-group">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<h2 class="form-signin-heading">Login</h2>
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<input type="text" name="username" class="form-control" placeholder="{% trans 'Usuario' %}">
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<input type="password" name="password" class="form-control" placeholder="{% trans 'Senha' %}">
 		</div>
 	</div>
     <div class="form-group">
-    <div class="col-md-12">
+    <div class="col-md-10">
 	<button class="btn btn-lg btn-primary btn-block" type="subimit">{% trans "Entrar" %}</button>
     <a href="{% url 'adduser' %}">{% trans "Cadastrar"%}</a>
     </div>

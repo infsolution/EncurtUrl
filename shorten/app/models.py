@@ -30,7 +30,8 @@ class Shortened(models.Model):
 		if self.perfil == None:
 			self.expiring_date = timezone.now() + datetime.timedelta(days=30)
 	
-
+	def get_private_code(self):
+		self.private_code = self.get_code()
 
 
 	def get_code(self):
@@ -43,5 +44,9 @@ class Shortened(models.Model):
 				code += str(chr(randint(65,90)))
 			else:
 				code += str(chr(randint(97,122)))
-		return code
+		try:
+			ucode = Shortened.objects.get(code=code)
+			self.get_code()
+		except Exception as e:		
+			return code
 

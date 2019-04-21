@@ -6,10 +6,9 @@ urlpatterns = [
     path('shorten/',views.shorten, name='shorten'),
     path('report/', views.shotened_report, name='report'),
     path('adduser/',views.create_user, name='adduser'),
-    path('acount/login/', v.LoginView.as_view()),
-    path('acount/logout/', v.LogoutView.as_view()),
-    path('login/', views.do_login, name='login'),
-    path('logout/', views.do_logout, name="logout"),
+    path('login/', v.LoginView.as_view(template_name='app/login.html'), name='login'),
+    path('logout/', v.LogoutView.as_view(template_name='app/login.html'), name='logout'),
+    path('access/', views.access_private,name="private"),
     path('<slug:shortened>', views.go_to_url, name='go'),
     
 ]

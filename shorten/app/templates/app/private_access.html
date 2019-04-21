@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% block body %}
+
+{% if error_msg %}
+    <div class="alert alert-danger" role="alert">
+      <p>{{error_msg}}</p>
+    </div>
+{% endif %}
+<h1>{% trans "A url  localhost:8000/"%}{{ short.url_shortened}}{% trans " é privada" %}</h1>
+<p>Informe o coigo de acesso! </p>
+<form class="col-md-10" method="POST" action="{% url 'private' %}">
+{% csrf_token %}
+    <input type="hidden" name="url_shortened" value="{{short.url_shortened}}" >
+    <div class="form-group">
+      <input type="text" class="form-control" name="private_code" id="" aria-describedby="helpId" placeholder="Código de acesso">
+    </div>
+    <button class="btn btn-primary" type="submit">{% trans "Acessar url" %}</button>
+</form>
+<a href="#">Peça o codigo de aceso ao criador da url!</a>
+{% endblock%}

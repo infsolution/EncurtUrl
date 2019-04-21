@@ -18,6 +18,8 @@ def shorten(request):
 	if request.GET.get('url'):
 		short = Shortened(perfil=get_perfil_logado(request), url=request.GET.get('url'))
 		short.shorten()
+		if request.GET.getlist('private'):
+			short.get_private_code()
 		short.save()
 		return render(request, 'app/index.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request)})
 	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", 
@@ -34,6 +36,8 @@ def go_to_url(request, shortened):
 			short = Shortened.objects.get(url_shortened=shortened)
 		except Exception as e:
 			return render(request,'app/urlnotfound.html', {"value":shortened,"error":e, "title_page":"Url Não encontrada"})
+		if short.private_code != None:
+			return render(request, 'app/private_access.html',{"short":short})
 		return redirect(short.url)
 
 def create_user(request):
@@ -61,3 +65,10 @@ def do_login(request):
 def do_logout(request):
 	logout(request)
 	return redirect('/login/')	
+
+def access_private(request):
+	if request.method == 'POST':
+		short = Shortened.objects.get(url_shortened=request.POST['url_shortened'])
+		if request.POST.get('private_code') == short.private_code:
+			return redirect(short.url)
+		return render(request, 'app/private_access.html',{"short":short, "error_msg":"Código inválido"})
