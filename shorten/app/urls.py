@@ -8,7 +8,10 @@ urlpatterns = [
     path('adduser/',views.create_user, name='adduser'),
     path('login/', v.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', v.LogoutView.as_view(template_name='app/login.html'), name='logout'),
-    path('access/', views.access_private,name="private"),
+    path('access/', views.access_private,name='private'),
+    path('contatos/', views.get_contatos, name='contatos'),
+    path('request-access/<slug:codeurl>/', views.request_access, name='request_access'),
     path('<slug:shortened>', views.go_to_url, name='go'),
     
 ]
+

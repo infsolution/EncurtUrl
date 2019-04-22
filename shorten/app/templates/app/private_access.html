@@ -17,5 +17,5 @@
     </div>
     <button class="btn btn-primary" type="submit">{% trans "Acessar url" %}</button>
 </form>
-<a href="#">Peça o codigo de aceso ao criador da url!</a>
+<a href="{% url 'request_access' short.url_shortened %}">Peça o codigo de aceso ao criador da url!</a>
 {% endblock%}

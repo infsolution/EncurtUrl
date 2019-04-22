@@ -72,3 +72,20 @@ def access_private(request):
 		if request.POST.get('private_code') == short.private_code:
 			return redirect(short.url)
 		return render(request, 'app/private_access.html',{"short":short, "error_msg":"Código inválido"})
+
+
+
+@login_required
+def get_contatos(request):
+	return render(request, 'app/contatos.html', {"perfil_logado":get_perfil_logado(request)})
+
+def request_access(request, codeurl):
+	if request.method == 'POST':
+		short = Shortened.objects.get(url_shortened=codeurl)
+		if send_message(short):
+			return render(request,'app/request_access.html',{"code":codeurl,"msg":"Sua solicitação foi enviada. Aquarde contato."})
+	return render(request,'app/request_access.html',{"code":codeurl})
+
+
+def send_message(short):
+	return True
