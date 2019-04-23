@@ -44,7 +44,7 @@ def create_user(request):
 	if request.method == 'POST':
 		form = UserModelForm(request.POST)
 		if form.is_valid():
-			user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+			user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['last-password'])#validar se as senhas são igauis
 			perfil = Perfil(name=user.username, user=user)
 			perfil.save()
 			return render(request, 'app/add.html', {'form':UserModelForm(), 'msg_confirm':'Parabéns seu cadastro foi realizado.'})
@@ -52,7 +52,7 @@ def create_user(request):
 	form = UserModelForm()
 	return render(request, 'app/add.html', {"form":form})
 
-def do_login(request):
+'''def do_login(request):
 	if request.method == 'POST':
 		user = authenticate(username = request.POST['username'], password =  request.POST['password'])
 		if user is not None:
@@ -60,7 +60,7 @@ def do_login(request):
 			#return redirect('/app/'+str(user.id), user)
 			return redirect('index')
 		return render(request,'app/login.html' ,{"error_msg":"Usuário ou senha Invalidos"})	
-	return render(request, 'app/login.html')
+	return render(request, 'app/login.html')'''
 
 def do_logout(request):
 	logout(request)
@@ -89,3 +89,8 @@ def request_access(request, codeurl):
 
 def send_message(short):
 	return True
+@login_required
+def detail(request, shortened_id):
+	shortened = Shortened.objects.get(id=shortened_id)
+	return render(request, 'app/detail.html', {'shortened':shortened, "perfil_logado":get_perfil_logado(request)})
+

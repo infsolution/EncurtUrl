@@ -20,9 +20,13 @@
 			<th scope="row">{{shortened.id}}</th>
 			<td>{{ shortened.url_shortened }}</td>
 			<td>{{shortened.url}}</td>
-			<td>@{{shortened.created_at}}</td>
+			<td>{{shortened.created_at}}</td>
+			{% if shortened.private_code == None %}
+			<td>{% trans "acesso público" %}</td>
+			{% else %}
 			<td>{{shortened.private_code}}</td>
-			<td><a href="#">Detalhes</a></td>
+			{% endif %}
+			<td><a href="{% url 'detail' shortened.id %}">Detalhes</a></td>
 			</tr>
 			{% endfor %}
 		{% endif %}

@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.index, name='index'),
     path('shorten/',views.shorten, name='shorten'),
     path('report/', views.shotened_report, name='report'),
+    path('report/<int:shortened_id>/', views.detail, name='detail'),
     path('adduser/',views.create_user, name='adduser'),
     path('login/', v.LoginView.as_view(template_name='app/login.html'), name='login'),
     path('logout/', v.LogoutView.as_view(template_name='app/login.html'), name='logout'),
