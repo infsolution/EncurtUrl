@@ -21,7 +21,15 @@
 			<td>{{ shortened.url_shortened }}</td>
 			<td>{{shortened.url}}</td>
 			<td>{{shortened.created_at}}</td>
+<<<<<<< HEAD
 			<td>{{shortened.private_code}}</td>
+=======
+			{% if shortened.private_code == None %}
+			<td>{% trans "acesso público" %}</td>
+			{% else %}
+			<td>{{shortened.private_code}}</td>
+			{% endif %}
+>>>>>>> 4ab1374d161559e396eb2e99bd4dd5a1b684a24f
 			<td><a href="{% url 'detail' shortened.id %}">Detalhes</a></td>
 			</tr>
 			{% endfor %}
