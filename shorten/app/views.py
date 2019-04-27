@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required 
+from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
@@ -20,24 +21,41 @@ def shorten(request):
 		short.shorten()
 		if request.GET.getlist('private'):
 			short.get_private_code()
+		if request.GET.getlist('preview'):
+			short.preview=True
+			short.preview_message = request.GET.get('preview_msg')
 		short.save()
 		return render(request, 'app/index.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request)})
 	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", 
 	"title_page":"Url Não encontrada","perfil_logado":get_perfil_logado(request)})
 @login_required
 def shotened_report(request):
+	ITEMS_PER_PAGE = 5
 	perfil_logado = get_perfil_logado(request)
 	shorteneds = Shortened.objects.filter(perfil=perfil_logado)
-	return render(request, 'app/report.html',{"shorteneds":shorteneds,"perfil_logado":perfil_logado})
+	paginator = Paginator(shorteneds, ITEMS_PER_PAGE)
+	page = request.GET.get('page',1)
+	try:
+		short_page = paginator.get_page(page)
+	except InvalidPage:
+		short_page = paginator.get_page(1)
+	return render(request, 'app/report.html',{"shorteneds":short_page,"perfil_logado":perfil_logado})
+
+def detail(request, shortened_id):
+	shorten = Shortened.objects.get(id=shortened_id)
+	return render(request, 'app/report_detail.html', {'shorten':shorten, 'perfil_logado':get_perfil_logado(request)})
 
 def go_to_url(request, shortened):
 	if request.method == 'GET':
 		try:
 			short = Shortened.objects.get(url_shortened=shortened)
+			get_click(request,short)
 		except Exception as e:
 			return render(request,'app/urlnotfound.html', {"value":shortened,"error":e, "title_page":"Url Não encontrada"})
 		if short.private_code != None:
 			return render(request, 'app/private_access.html',{"short":short})
+		if short.preview:
+			return render(request, 'app/preview.html',{'short':short, 'perfil_logado':get_perfil_logado(request)})
 		return redirect(short.url)
 
 def create_user(request):
@@ -89,3 +107,6 @@ def request_access(request, codeurl):
 
 def send_message(short):
 	return True
+def get_click(request, shortened):
+	shor = Click(shortened=shortened)
+	print(shor.save())

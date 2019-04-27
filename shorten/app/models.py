@@ -21,6 +21,8 @@ class Shortened(models.Model):
 	expiring_date = models.DateTimeField(auto_now_add=False, null=True)
 	code = models.CharField(max_length=12, null=True, unique=True)
 	private_code = models.CharField(max_length=12, null=True)
+	preview = models.BooleanField(default=False)
+	preview_message = models.TextField(null=True)
 
 	def shorten(self):
 		self.url_shortened = self.get_code()
@@ -50,3 +52,11 @@ class Shortened(models.Model):
 		except Exception as e:		
 			return code
 
+class Click(models.Model):
+	shortened = models.ForeignKey(Shortened, related_name='clicks', on_delete=models.CASCADE)
+	user = models.ForeignKey(Perfil, related_name='clicks', on_delete=models.CASCADE, null=True)
+	ip = models.CharField(max_length=15, null=True)
+	locale = models.CharField(max_length=256, null=True)
+	date_hour = models.DateTimeField(auto_now_add=True)
+	browser = models.CharField(max_length=256, null=True)
+	os = models.CharField(max_length=256, null=True)

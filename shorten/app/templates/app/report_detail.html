@@ -1,0 +1,12 @@
+{% extends "app/base.html" %}
+
+{% block body %}
+  {{ shorten.url_shortened }}
+  {% with total=shorten.clicks.count %}
+  {% if total %}
+  <p>Número de cliques {{ total }}</p>
+  {% else %}
+   <p>Ops! Nenhum click até agora =( </p>
+    {% endif %}
+  {% endwith %}
+{% endblock body %}

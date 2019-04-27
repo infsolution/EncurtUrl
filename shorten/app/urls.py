@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', v.LogoutView.as_view(template_name='app/login.html'), name='logout'),
     path('access/', views.access_private,name='private'),
     path('contatos/', views.get_contatos, name='contatos'),
+    path('report/<int:shortened_id>/',views.detail, name='detail'),
     path('request-access/<slug:codeurl>/', views.request_access, name='request_access'),
     path('<slug:shortened>', views.go_to_url, name='go'),
     
