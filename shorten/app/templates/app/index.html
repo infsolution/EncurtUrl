@@ -26,17 +26,10 @@
 				</div>	
 				</form>
 			{% if url_short %}
-				<h3>Sua url: localhost:8000/{{ url_short }}</h3>
+				<h3 class="col-md-10">Sua url:</h3> 
+				<p class="col-md-10">localhost:8000/{{ url_short }}</p>
+				<p class="col-md-10"><a href="#">{% trans "Compartilhar com seus contatos" %}</a></p>
 			{% endif %}	
 </div>
-		
-<script>
-	function showTextMessage() {
-		if(document.getElementById("myCheck").checked = true){
-			document.getElementById("text_preview").style.display = "block";
-		}
-		
-	}
-	</script>
 {% endblock %}
 

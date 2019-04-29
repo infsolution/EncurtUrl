@@ -40,7 +40,7 @@ def shotened_report(request):
 	except InvalidPage:
 		short_page = paginator.get_page(1)
 	return render(request, 'app/report.html',{"shorteneds":short_page,"perfil_logado":perfil_logado})
-
+@login_required
 def detail(request, shortened_id):
 	shorten = Shortened.objects.get(id=shortened_id)
 	return render(request, 'app/report_detail.html', {'shorten':shorten, 'perfil_logado':get_perfil_logado(request)})
@@ -107,14 +107,11 @@ def request_access(request, codeurl):
 
 def send_message(short):
 	return True
-<<<<<<< HEAD
+
 def get_click(request, shortened):
 	shor = Click(shortened=shortened)
 	print(shor.save())
-=======
-@login_required
-def detail(request, shortened_id):
-	shortened = Shortened.objects.get(id=shortened_id)
-	return render(request, 'app/detail.html', {'shortened':shortened, "perfil_logado":get_perfil_logado(request)})
 
->>>>>>> 4ab1374d161559e396eb2e99bd4dd5a1b684a24f
+
+
+
