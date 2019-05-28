@@ -12,6 +12,8 @@ urlpatterns = [
     path('access/', views.access_private,name='private'),
     path('contatos/', views.get_contatos, name='contatos'),
     path('request-access/<slug:codeurl>/', views.request_access, name='request_access'),
-    path('<slug:shortened>', views.go_to_url, name='go'),   
+    path('<slug:shortened>', views.go_to_url, name='go'),
+    path('about/', views.about, name='about'),
+    path('help/',views.help, name='help'),   
 ]
 

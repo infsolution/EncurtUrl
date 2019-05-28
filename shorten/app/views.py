@@ -113,5 +113,14 @@ def get_click(request, shortened):
 	print(shor.save())
 
 
+def about(request):
+	context = {}
+	if get_perfil_logado(request):
+		context = {"perfil_logado":get_perfil_logado(request)}
+	return render(request, 'app/about.html',context)
 
-
+def help(request):
+	context = {}
+	if get_perfil_logado(request):
+		context = {"perfil_logado":get_perfil_logado(request)}
+	return render(request, 'app/help.html',context)
