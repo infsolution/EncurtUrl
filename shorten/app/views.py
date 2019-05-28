@@ -25,7 +25,8 @@ def shorten(request):
 			short.preview=True
 			short.preview_message = request.GET.get('preview_msg')
 		short.save()
-		return render(request, 'app/index.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request)})
+		return render(request, 'app/showurl.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request),
+			"title_page":"TShort: Sua url encurtada"})
 	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", 
 	"title_page":"Url Não encontrada","perfil_logado":get_perfil_logado(request)})
 @login_required

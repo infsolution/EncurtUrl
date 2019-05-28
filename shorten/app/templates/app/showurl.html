@@ -1,0 +1,17 @@
+{% extends 'app/base.html' %}
+{% load i18n %}
+{% block body %}
+	<div class="card text-center" id="main">
+	  <div class="card-header">
+	    Parabéns Sua URL está curta
+	  </div>
+	  <div class="card-body">
+	    <h5 class="card-title">Aqui está sua url encurtada</h5>
+	    <p class="card-text">tsht.tk/{{ url_short }}</p>
+	    <a href="{% url 'index' %}" class="btn btn-primary">Ecurtar outra url</a>
+	  </div>
+	  <div class="card-footer text-muted">
+	    Cadastre-se ou entre na sua conta para obter recursos incríveis!
+	  </div>
+	</div>
+{% endblock %}

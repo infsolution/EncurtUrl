@@ -4,12 +4,15 @@
 {% load static %}
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>{% trans title_page %}</title>
 	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <script defer src="{% static 'fontawesome/js/fontawesome-all.min.js' %}"></script>
   <link rel="stylesheet" href="{% static 'fontawesome/css/fontawesome-all.min.css' %}">
+	<style type="text/css">
+		#main{ height: 60vh}
+	</style>
 	{% block head %}
 	{% endblock %}
 </head>
@@ -17,7 +20,7 @@
 <div class="container-fluid">
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-				<div class="container">
+			<div class="container">
 				<a class="navbar-brand" href="{% url 'index' %}">TShort</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -41,7 +44,6 @@
 							<div class="dropdown-menu">
 								<a class="dropdown-item" href="{% url 'report' %}">{% trans "Relatório" %}</a>
 								<a class="dropdown-item" href="{% url 'contatos' %}">{% trans "Contatos" %}</a>
-								<a class="dropdown-item" href="#">Something else here</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="{%url 'logout' %}">Sair</a>
 							</div>
@@ -58,29 +60,61 @@
 		</nav>
 	</header>
 	
-	<section class="row">
+	<section class="row" >
 	<nav class="col-md-3">
-			<div class="container-fluid">
 				Publicidade
-			</div>
 			
 		</nav>
 	<article class="col-md-9">
 		{% block body %}
 		{% endblock %}
 	</article>
-	<section>
+	</section>
 
-	<footer>
-	 <p> &copy; {% trans "Todos os direitos resevados a Infsolution." %}</p>
-	</footer>	
-	</div>
+
+	<div class="row">
+		<footer class="col-md-12"> 
+			<div class="footer-main bg-primary py-5 small">
+			 	<div class="container">
+			 		<div class="row">
+			 		<div class="col-md-6">
+			 			
+			 			<ul style="list-style: none">
+			 				<li><a href="" class="text-white">{% trans "Fale conosco" %}</a></li>
+			 				<li><a href="" class="text-white">{% trans "Sugestões" %}</a></li>
+			 			</ul>
+			 			<p class="text-white"> &copy; {% trans "Todos os direitos resevados a Infsolution." %}</p>
+			 		</div>
+			 		<div class="col-md-6">
+			 			<ul style="list-style: none">
+			 				<li><a href="" class="text-white">{% trans "Fale conosco" %}</a></li>
+			 				<li><a href="" class="text-white">{% trans "Sugestões" %}</a></li>
+			 			</ul>
+			 			
+			 			
+			 		</div>
+			 	</div>
+				</div>
+			</div>
+		</footer>
+	</div>	
+</div>	
 		<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
 
-
+			 		<!--p> &copy; {% trans "Todos os direitos resevados a Infsolution." %}</p>
+					<a href="/about">Start Bootstrap</a>
+					is a project created and maintained by
+					<a href="http://davidmiller.io">David Miller</a>.
+					<br>
+					Themes, templates, and snippets licensed
+					<a href="https://opensource.org/licenses/MIT">MIT</a>, Start Bootstrap website
+					<a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+					<br>
+					Based on
+					<a href="https://getbootstrap.com">Bootstrap</a-->
 
 	<!--form action="{% url 'set_language' %}" method="post">{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
