@@ -1,17 +1,38 @@
 {% extends 'app/base.html' %}
 {% load i18n %}
+{% block head %}
+<script type="text/javascript">
+	function copyText() {
+		document.getElementById("urlshort").select();
+		document.execCommand('Copy');
+		alert("Url copiada");
+	}
+</script>
+{% endblock %}
 {% block body %}
 	<div class="card text-center" id="main">
 	  <div class="card-header">
-	    Parabéns Sua URL está curta
+	    Parabéns! Aqui está sua url encurtada.
 	  </div>
 	  <div class="card-body">
-	    <h5 class="card-title">Aqui está sua url encurtada</h5>
-	    <p class="card-text">tsht.tk/{{ url_short }}</p>
+	    <h5 class="card-title"  onclick="copyText()">clique aqui para copiar a url</h5>
+	    <p class="card-text"><input type="text" id="urlshort" value="tsht.tk/{{ url_short }}"></p>
 	    <a href="{% url 'index' %}" class="btn btn-primary">Ecurtar outra url</a>
 	  </div>
 	  <div class="card-footer text-muted">
-	    Cadastre-se ou entre na sua conta para obter recursos incríveis!
+	  	{% if perfil_logado.name %}
+	  		Compartilhar com seus contatos
+	  	{% else %}
+	    Cadastre-se ou entre na sua conta para obter recursos incríveis de graça!
+	    {% endif %}
 	  </div>
 	</div>
+	{% if perfil_logado.name == None %}
+	<h3>Atenção</h3>
+	<ul style="list-style: none">
+		<li>Sua url expira em trinta dias</li>
+		<li><a href="{% url 'adduser' %}">Cadastre-se</a> ou <a href="{% url 'login' %}">entre em sua conta</a> para criar urls que nunca expiram</li>
+		<li>Veja todas as vantagens de criar uma conta no <strong>melhor encurtador de todos os tempos</strong></li>
+	</ul>
+	{% endif %}
 {% endblock %}

@@ -3,8 +3,8 @@
 {% block body %}
 
 {% if msg_confirm %}
-    <div class="alert alert-success" role="alert">
-        {% trans msg_confirm %} <a href="{% url 'login' %}">Fazer login</a>
+    <div class="alert alert-{{alert_type}}" role="alert">
+        {% trans msg_confirm %}
     </div>
 {% endif %}
 <form action="{% url 'adduser' %}" class="form-signin" method="POST">

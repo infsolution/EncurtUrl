@@ -63,11 +63,14 @@ def create_user(request):
 	if request.method == 'POST':
 		form = UserModelForm(request.POST)
 		if form.is_valid():
-			user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['last-password'])#validar se as senhas são igauis
-			perfil = Perfil(name=user.username, user=user)
-			perfil.save()
-			return render(request, 'app/add.html', {'form':UserModelForm(), 'msg_confirm':'Parabéns seu cadastro foi realizado.'})
-		return render(request, 'app/add.html',{'form':UserModelForm(request.POST), 'msg_confirm':'Ocorreu um erro ao realizar o cadastro.'})
+			if request.POST['last-password'] == request.POST['password']:
+				user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['last-password'])#validar se as senhas são igauis
+				perfil = Perfil(name=user.username, user=user)
+				perfil.save()
+				return render(request, 'app/add.html', {'form':UserModelForm(), 'alert_type':'success', 'msg_confirm':'Parabéns seu cadastro foi realizado.'})
+			else:
+				return render(request, 'app/add.html', {'form':UserModelForm(),'alert_type':'danger' , 'msg_confirm':'As senhas não são iguais'})
+		return render(request, 'app/add.html',{'form':UserModelForm(request.POST), 'alert_type':'danger','msg_confirm':'Ocorreu um erro ao realizar o cadastro.'})
 	form = UserModelForm()
 	return render(request, 'app/add.html', {"form":form})
 
