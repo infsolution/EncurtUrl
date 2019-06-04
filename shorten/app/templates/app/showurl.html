@@ -5,7 +5,7 @@
 	function copyText() {
 		document.getElementById("urlshort").select();
 		document.execCommand('Copy');
-		alert("Url copiada");
+		//alert("Url copiada");
 	}
 </script>
 {% endblock %}
@@ -15,7 +15,7 @@
 	    Parabéns! Aqui está sua url encurtada.
 	  </div>
 	  <div class="card-body">
-	    <h5 class="card-title"  onclick="copyText()">clique aqui para copiar a url</h5>
+	    <h5 class="card-title"  onclick="copyText()" data-toggle="modal" data-target="#exampleModal">clique aqui para copiar a url</h5>
 	    <p class="card-text"><input type="text" id="urlshort" value="tsht.tk/{{ url_short }}"></p>
 	    <a href="{% url 'index' %}" class="btn btn-primary">Ecurtar outra url</a>
 	  </div>
@@ -28,11 +28,34 @@
 	  </div>
 	</div>
 	{% if perfil_logado.name == None %}
-	<h3>Atenção</h3>
+	
+	 <div class="alert alert-primary" role="alert">
+	<h3>Atenção</h3> 	
 	<ul style="list-style: none">
 		<li>Sua url expira em trinta dias</li>
 		<li><a href="{% url 'adduser' %}">Cadastre-se</a> ou <a href="{% url 'login' %}">entre em sua conta</a> para criar urls que nunca expiram</li>
-		<li>Veja todas as vantagens de criar uma conta no <strong>melhor encurtador de todos os tempos</strong></li>
+		<li>Veja todas as vantagens de criar uma conta no <strong>melhor encurtador de todos os tempos</strong> <a href="{% url 'help' %}">clicando aqui!</a></li>
 	</ul>
+</div>
 	{% endif %}
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sua url foi copiada</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Compartilhe com seus amigos</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

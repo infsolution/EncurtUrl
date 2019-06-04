@@ -2,7 +2,64 @@
 {% load i18n %}
 
 {% block body %}
-<div class="row" id="main">
-	
+<p>Ajuda e informações</p>
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Por que o TShort é o melhor encurtador?
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        O TShort oferece muitas vantagen de graça para seus usuários, Além de dispor de recuros que nenhum outro encurtador possui.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          O que é url privada?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        No TShort os seus usuários podem criar urls privadas que funcionam assim: ao escolher encurtar uma url de forma privada é gerado um código secreto, que o usuário disponibiliza somente para aqueles que ele deseja que acessem a url, então ele pode compartilhar a url em grupos e somente quem tiver o código secreto pode acessar a url.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Quem não tem o códgo secreto? 
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        Quem recebeu uma url privada em um grupo ou perdeu o código secreto, pode pedir ao criador da url que lhe envie o código, clicando em "pedir código secreto ao criador da url", na página intermediária de acesso à url e o dono da url será notficado do seu interesse e poderar lhe enviar o código. 
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFor" aria-expanded="false" aria-controls="collapseFor">
+          Como personalizar uma url? 
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFor" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        Para personalizar urls é preciso criar uma conta no <strong>TShort</strong> e estar logado, na sua área de urls clique na url desejada e clique em personalizar. 
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

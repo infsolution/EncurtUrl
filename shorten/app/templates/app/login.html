@@ -11,12 +11,12 @@
 	
     <div class="form-group">
 		<div class="col-md-10">
-			<h2 class="form-signin-heading">Login</h2>
+			<h2 class="form-signin-heading">{% trans "Entre" %}</h2>
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-md-10">
-			<input type="text" name="username" class="form-control" placeholder="{% trans 'Usuario' %}">
+			<input type="text" name="username" class="form-control" placeholder="{% trans 'Usuário' %}">
 		</div>
 	</div>
 	<div class="form-group">
@@ -27,9 +27,13 @@
     <div class="form-group">
     <div class="col-md-10">
 	<button class="btn btn-lg btn-primary btn-block" type="subimit">{% trans "Entrar" %}</button>
-    <a href="{% url 'adduser' %}">{% trans "Cadastrar"%}</a>
+     
     </div>
     
     </div>
 </form>
+<div class="alert alert-success col-md-10" role="alert">
+     	<span>Ainda não tem conta?</span> 
+    <a href="{% url 'adduser' %}">{% trans "Cadastre-se"%}</a>
+    </div>
 {% endblock %}

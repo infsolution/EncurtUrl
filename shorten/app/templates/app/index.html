@@ -1,14 +1,15 @@
 {% extends 'app/base.html' %}
 {% load i18n %}
 {% block head %}
-    <!--style type="text/css">
-		#form-id{height: 50vh}
-	</style-->
+    <style type="text/css">
+		
+	</style>
 
 
 
 {%endblock%}
 {% block body %}
+<h1>O melhor encurtador de todos os tempos</h1>
 <div class="container-fluid col-md-10">
 	<div class="row justify-content-center align-items-center" id="main">
 		<form method="GET" action="{% url 'shorten' %}">

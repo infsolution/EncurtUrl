@@ -8,9 +8,9 @@ class UserModelForm(forms.ModelForm):
         model = User
         fields = ['username','email', 'password']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'maxlength':255,'placeholder':"Nome"}),
-            'email':forms.TextInput(attrs={'class':'form-control', 'maxlength':255,'placeholder':"Email"}),
-            'password':forms.PasswordInput(attrs={'class':'form-control', 'maxlength':255,'placeholder':"Senha"}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'maxlength':255,'placeholder':"Escolha um nome só seu"}),
+            'email':forms.TextInput(attrs={'class':'form-control', 'maxlength':255,'placeholder':"Informe seu melhor email"}),
+            'password':forms.PasswordInput(attrs={'class':'form-control', 'maxlength':255,'placeholder':"Crie uma senha"}),
         }
         error_messages={
             'username':{
