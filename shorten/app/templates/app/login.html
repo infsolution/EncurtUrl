@@ -6,34 +6,35 @@
         {% trans error_msg %}
     </div>
 {% endif %}
-<form action="{% url 'login' %}" class="form-signin" method="POST">
+<form action="{% url 'login' %}" class="form-signin col-md-6" method="POST" style="color: gray; background: #C1CDCD;">
 	{% csrf_token %}
 	
     <div class="form-group">
-		<div class="col-md-10">
-			<h2 class="form-signin-heading">{% trans "Entre" %}</h2>
+		<div align="center">
+			<h3 class="form-signin-heading text-primary">{% trans "Entre" %}</h3>
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-md-10">
+		<div>
 			<input type="text" name="username" class="form-control" placeholder="{% trans 'Usuário' %}">
 		</div>
 	</div>
 	<div class="form-group">
-		<div class="col-md-10">
+		<div>
 			<input type="password" name="password" class="form-control" placeholder="{% trans 'Senha' %}">
 		</div>
 	</div>
     <div class="form-group">
-    <div class="col-md-10">
+    <div>
 	<button class="btn btn-lg btn-primary btn-block" type="subimit">{% trans "Entrar" %}</button>
      
     </div>
     
     </div>
-</form>
-<div class="alert alert-success col-md-10" role="alert">
+    <div class="alert alert-success" role="alert">
      	<span>Ainda não tem conta?</span> 
-    <a href="{% url 'adduser' %}">{% trans "Cadastre-se"%}</a>
+    	<a href="{% url 'adduser' %}" >{% trans "Cadastre-se"%}</a>
     </div>
+</form>
+
 {% endblock %}
