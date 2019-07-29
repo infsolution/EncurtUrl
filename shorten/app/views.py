@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from .models import *
 from .forms import *
+
 def index(request):
 	perfil_logado = get_perfil_logado(request)
 	return render(request,'app/index.html',{"title_page":"O melhor encurtador","perfil_logado":perfil_logado})
@@ -128,3 +130,15 @@ def help(request):
 	if get_perfil_logado(request):
 		context = {"perfil_logado":get_perfil_logado(request)}
 	return render(request, 'app/help.html',context)
+
+def personalize(request, shortened_id):
+	pass
+
+def valid(request, url):
+	rersult = None
+	try:
+		url = Shortened.objects.get(url_shortened=url)
+		rersult = True
+	except Exception as e:
+		rersult = False
+	return JsonResponse({'result':result})

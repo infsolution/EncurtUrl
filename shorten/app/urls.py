@@ -14,6 +14,8 @@ urlpatterns = [
     path('request-access/<slug:codeurl>/', views.request_access, name='request_access'),
     path('<slug:shortened>', views.go_to_url, name='go'),
     path('about/', views.about, name='about'),
-    path('help/',views.help, name='help'),   
+    path('help/',views.help, name='help'),
+    path('personalize/<int:shortened_id>/', views.personalize, name='personalize'),
+    path('valid/<int:shortened_id>/', views.valid, name='valid'),
 ]
 

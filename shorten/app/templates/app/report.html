@@ -1,15 +1,24 @@
 {% extends 'app/base.html' %}
 {% load i18n %}
+{% block head %}
+<script type="text/javascript">
+	function ola(){
+		alert('ola');
+	}
+</script>
+
+
+{% endblock %}
 {% block body %}
 <h2>{% trans "Sua Urls" %}</h2>
 <table class="table table-hover table-responsive">
 	<thead>
 		<tr>
 			<th scope="col">{% trans "ID"%}</th>
-			<th scope="col">{% trans "URL EUNCURTADA"%}</th>
+			<th scope="col">{% trans "URL CURTA"%}</th>
 			<th scope="col">{% trans "URL"%}</th>
 			<th scope="col">{% trans "DATA"%}</th>
-			<th scope="col">{% trans "CÓDIGO SECRETO"%}</th>
+			<th scope="col">{% trans "ACESSO"%}</th>
 		</tr>
 	</thead>
 	<tbody>	
@@ -21,12 +30,36 @@
 			<td>{{shortened.url}}</td>
 			<td>{{shortened.created_at}}</td>
 			{% if shortened.private_code == None %}
-			<td>{% trans "acesso público" %}</td>
+			<td>{% trans "Público" %}</td>
 			{% else %}
 			<td>{{shortened.private_code}}</td>
 			{% endif %}
 			<td><a href="{% url 'detail' shortened.id %}">Detalhes</a></td>
+			<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+		  		Personalizar
+			</button></td>
 			</tr>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Informe um nome personalizado!</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form action="" method="POST">
+						<input type="text" name="" value="" placeholder="sua url" onclick="ola()"><div id="valid"></div>
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <button type="button" class="btn btn-primary">Save changes</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 			{% endfor %}
 		{% endif %}
 </tbody>
