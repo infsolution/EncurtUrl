@@ -27,7 +27,7 @@
 			<tr>
 			<th scope="row">{{shortened.id}}</th>
 			<td>{{ shortened.url_shortened }}</td>
-			<td>{{shortened.url}}</td>
+			<td>{{shortened.url_user}}</td>
 			<td>{{shortened.created_at}}</td>
 			{% if shortened.private_code == None %}
 			<td>{% trans "Público" %}</td>

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, InvalidPage
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from rest_framework import generics
 from .models import *
 from .forms import *
 
@@ -29,7 +30,7 @@ def shorten(request):
 		short.save()
 		return render(request, 'app/showurl.html',{"url_short":short.url_shortened,"perfil_logado":get_perfil_logado(request),
 			"title_page":"TShort: Sua url encurtada"})
-	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada", 
+	return render(request,'app/urlnotfound.html', {"value":"Nenhuma url foi informada",
 	"title_page":"Url Não encontrada","perfil_logado":get_perfil_logado(request)})
 @login_required
 def shotened_report(request):
@@ -142,3 +143,5 @@ def valid(request, url):
 	except Exception as e:
 		rersult = False
 	return JsonResponse({'result':result})
+
+#API#

@@ -15,7 +15,7 @@ class Perfil(models.Model):
 
 class Shortened(models.Model):
 	perfil = models.ForeignKey(Perfil, related_name='shorteneds', on_delete=models.CASCADE, null=True)
-	url = models.CharField(max_length=1024)
+	url_user = models.CharField(max_length=1024)
 	url_shortened = models.CharField(max_length=256, null=True, unique=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	expiring_date = models.DateTimeField(auto_now_add=False, null=True)
@@ -23,6 +23,8 @@ class Shortened(models.Model):
 	private_code = models.CharField(max_length=12, null=True)
 	preview = models.BooleanField(default=False)
 	preview_message = models.TextField(null=True)
+	class Meta:
+		ordering = ('-id',)
 
 	def shorten(self):
 		self.url_shortened = self.get_code()
@@ -31,7 +33,7 @@ class Shortened(models.Model):
 	def set_expiring_date(self):
 		if self.perfil == None:
 			self.expiring_date = timezone.now() + datetime.timedelta(days=30)
-	
+
 	def get_private_code(self):
 		self.private_code = self.get_code()
 
@@ -49,7 +51,7 @@ class Shortened(models.Model):
 		try:
 			ucode = Shortened.objects.get(code=code)
 			self.get_code()
-		except Exception as e:		
+		except Exception as e:
 			return code
 
 class Click(models.Model):

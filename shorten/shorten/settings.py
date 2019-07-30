@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'bootstrap',
     'fontawesome',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
