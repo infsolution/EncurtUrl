@@ -20,7 +20,7 @@ def get_perfil_logado(request):
 
 def shorten(request):
 	if request.GET.get('url'):
-		short = Shortened(perfil=get_perfil_logado(request), url=request.GET.get('url'))
+		short = Shortened(perfil=get_perfil_logado(request), url_user=request.GET.get('url'))
 		short.shorten()
 		if request.GET.getlist('private'):
 			short.get_private_code()
@@ -60,7 +60,7 @@ def go_to_url(request, shortened):
 			return render(request, 'app/private_access.html',{"short":short})
 		if short.preview:
 			return render(request, 'app/preview.html',{'short':short, 'perfil_logado':get_perfil_logado(request)})
-		return redirect(short.url)
+		return redirect(short.url_user)
 
 def create_user(request):
 	if request.method == 'POST':
@@ -95,7 +95,7 @@ def access_private(request):
 	if request.method == 'POST':
 		short = Shortened.objects.get(url_shortened=request.POST['url_shortened'])
 		if request.POST.get('private_code') == short.private_code:
-			return redirect(short.url)
+			return redirect(short.url_user)
 		return render(request, 'app/private_access.html',{"short":short, "error_msg":"Código inválido"})
 
 
