@@ -25,7 +25,7 @@ SECRET_KEY = 'px5=qme0%5xei9p3=1&@w4lwl7u)nf98#c+2+^z*0p59xh7$9b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['api.tsht.tk', 'localhost','tsht.tk']
 
 
 # Application definition

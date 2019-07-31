@@ -14,7 +14,7 @@ import signal
 import sys
 
 from django.core.wsgi import get_wsgi_application
-sys.path.append('/var/www/html/EncurtUrl/shorten/shorten')
+sys.path.append('/var/www/html/EncurtUrl/shorten/')
 sys.path.append('/var/www/html/tkvenv/lib/python3.5/site-packages')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shorten.settings")
 
